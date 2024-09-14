@@ -1,20 +1,50 @@
-import { StatusBar } from 'expo-status-bar';
-import { StyleSheet, Text, View } from 'react-native';
+import { View, SafeAreaView, StyleSheet, Image, StatusBar, ScrollView } from 'react-native';
+import { MaterialCommunityIcons } from '@expo/vector-icons'
+
+import { posts } from './posts'
+
+import {Post} from './Post'
 
 export default function App() {
+
   return (
-    <View style={styles.container}>
-      <Text>Open up App.js to start working on your app!</Text>
-      <StatusBar style="auto" />
-    </View>
+    <SafeAreaView style={styles.safe}>
+      <StatusBar backgroundColor="#F56040" />
+      <View style={styles.header}>
+        <Image
+          style={styles.logo}
+          source={require('./assets/instagram.jpg')}
+      
+        />
+        <MaterialCommunityIcons name='chat-outline' size={30} color="#CCC" />
+      </View>
+
+      <ScrollView>
+        {
+          posts.map((post) => (
+            <Post post={post}></Post>
+          ))
+        }
+      </ScrollView>
+    </SafeAreaView>
   );
 }
 
 const styles = StyleSheet.create({
-  container: {
+  safe: {
     flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
+    backgroundColor: '#FFF'
   },
-});
+  logo: {
+    width: 40,
+    height: 40
+  },
+  header: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    padding: 10,
+    alignItems: 'center',
+    borderBottomColor: '#CCC',
+    borderBottomWidth: 1
+  }
+})
